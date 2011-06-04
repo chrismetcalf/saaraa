@@ -1,0 +1,57 @@
+/**
+ * General
+ */
+img { border: 0; }
+
+body {
+  font-family: "Trebuchet MS", "Bitstream Vera Sans", verdana, lucida, arial, helvetica, sans-serif;
+  font-size: medium;
+  background: #fff;
+  color: #555;
+  padding-top: 10px;
+  margin-left: 5%;
+  margin-right: 5%;
+  padding-bottom: 10px;
+}
+
+a:link, a:active, a:visited {
+  color: #333;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a img {
+  border: 0;
+}
+
+hr {
+  border: 0;
+  width: 80%;
+  background-color: #666;
+  height: 1px;
+}
+
+h1 {
+  font-size: large;
+  margin: 0;
+}
+
+h2 {
+  font-size: medium;
+  margin: 0
+}
+
+/*
+ * Vertical margins around block elements.
+ */
+
+p {
+  margin: 1em 0;
+}
+
+li p, dd p, td p {
+  margin: 1ex 0;
+}
