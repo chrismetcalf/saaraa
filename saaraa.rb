@@ -147,9 +147,7 @@ post '/reports' do
     report.metadata = data[:metadata]
 
     # Location
-    loc = Location.new(data[:location])
-    loc.save!
-    report.location = loc
+    report.location = Location.new(data[:location])
 
     # Photos
     report.photos = data[:photos]
