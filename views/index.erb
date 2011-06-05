@@ -1,7 +1,39 @@
-<p>Enter your city &amp; state or your zip code to locate a SAMHSA facility in your area:</p>
+<h1>Reports</h1>
 
-<form method="get" action="/search">
-  <input type="text" name="location" />
-  <input type="submit" value="Search" />
-</form>
+<% if(@reports.nil? || @reports.count == 0) %>
+  <p>No reports yet.</p>
+<% else %>
+  <p>The following reports have been submitted</p>
+  <% @reports.each do |report| %>
+    <h2>Report: <%= report.id %></h2>
+    <ul>
+      <li><em>Reporter:</em> <%= report.reporter.email %> / <%= report.reporter.phone %></li>
+      <li><em>Captured:</em> <%= report.captured %></li>
+      <li><em>Submitted:</em> <%= report.submitted %></li>
+      <li><em>Category:</em> <%= report.category %></li>
+      <li><em>Description:</em> <%= report.description %></li>
+      <li><em>Severity:</em> <span style="background: <%= report.severity.downcase %>"><%= report.severity %></span></li>
+      <li><em>Location:</em> (<%= report.location.latitude %>, <%= report.location.longitude %>)</li>
+    </ul>
+
+    <h3>Metadata (Class: <%= report.metadata.class %>):</h3>
+    <pre>
+      <%= report.metadata %>
+    </pre>
+  <% end %>
+<% end %>
+
+<% if(@reporters.nil? || @reporters.count == 0) %>
+  <p>No reporters yet.</p>
+<% else %>
+  <p>The following individuals have submitted reports:</p>
+  <% @reporters.each do |reporter| %>
+    <h2>Reporter: <%= reporter.id %></h2>
+    <ul>
+      <li><em>Email:</em> <%= reporter.email %></li>
+      <li><em>Phone:</em> <%= reporter.phone %></li>
+    </ul>
+  <% end %>
+<% end %>
+
 
