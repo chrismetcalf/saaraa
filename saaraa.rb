@@ -9,7 +9,7 @@ require 'mongo'
 require 'mongo_mapper'
 
 configure do
-  set :raise_errors, false 
+  set :raise_errors, false
   MongoMapper.database = "saaraa"
 end
 
@@ -49,8 +49,8 @@ end
 class Reporter
   include MongoMapper::Document
 
-  key :email, String, :format => /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  key :phone, String, :format => /[0-9\-()+]+/
+  key :email, String
+  key :phone, String
 
   many :reports
 
@@ -59,6 +59,20 @@ class Reporter
     if email.nil? && phone.nil?
       errors.add(:email, "You must specify an email or a phone number")
       errors.add(:phone, "You must specify an email or a phone number")
+    end
+  end
+
+  validate :email_null_or_valid
+  def email_null_or_valid
+    if !email.nil? && !email.match(/\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i)
+      errors.add(:email, "Your email is invalid: #{email}")
+    end
+  end
+
+  validate :phone_null_or_valid
+  def phone_null_or_valid
+    if !phone.nil? && !phone.match(/[0-9\-()+]+/)
+      errors.add(:phone, "Your phone is invalid: #{phone}")
     end
   end
 end
@@ -133,15 +147,20 @@ post '/reports' do
     report.metadata = data[:metadata]
 
     # Location
-    report.location = Location.new(data[:location])
+    loc = Location.new(data[:location])
+    loc.save!
+    report.location = loc
 
     # Photos
     report.photos = data[:photos]
 
     # Reporter
-    report.reporter = Reporter.first(:email => data[:reporter][:email])
+    report.reporter = Reporter.first(:email => data[:reporter][:email], :phone => data[:reporter][:phone])
     if report.reporter.nil?
-      report.reporter = Reporter.new(data[:reporter])
+      # TODO: How do I create and validate in one call?
+      reporter = Reporter.new(data[:reporter])
+      reporter.save!
+      report.reporter = reporter
     end
 
     # Save it!
