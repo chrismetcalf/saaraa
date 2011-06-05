@@ -5,12 +5,16 @@
     "phone" : "734-276-1100"
   },
   "location" : {
-    "latitude" : "47.646210",
-    "longitude" : "-122.138750"
+    "latitude" : 47.646210,
+    "longitude" : -122.138750
   },
   "category" : "Zombies",
   "description" : "ZOMBIES!!! EVERYWHERE!!!",
   "severity" : "Red",
+  "photos" : [
+    "http://twitpic.com/5710qz",
+    "http://twitpic.com/5737mm"
+  ],
   "metadata" : {
     "garbage" : "yup",
     "junk_array" : [ "foo", "bar" ],

@@ -46,7 +46,6 @@ class Array
   end
 end
 
-
 class Reporter
   include MongoMapper::Document
 
@@ -73,11 +72,23 @@ class Report
   key :category, String, :required => true # Eventually validate this
   key :description, String, :required => true
 
+  key :photos, Array
+
   key :severity, String, :in => ["Green", "Yellow", "Red"]
   key :metadata, Object
 
   one :location
   belongs_to :reporter
+
+  validate :photos_are_urls
+  def photos_are_urls
+    photos.each do |photo|
+      # TODO: Something not absolutely naieve
+      if !photo.match(/^http:\/\//)
+        errors.add(:photos, "Not a URL: #{photo}")
+      end
+    end
+  end
 end
 
 class Location
@@ -121,6 +132,9 @@ post '/reports' do
 
     # Location
     report.location = Location.new(data[:location])
+
+    # Photos
+    report.photos = data[:photos]
 
     # Reporter
     report.reporter = Reporter.first(:email => data[:reporter][:email])
