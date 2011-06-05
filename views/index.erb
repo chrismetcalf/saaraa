@@ -6,27 +6,44 @@
   <p>The following reports have been submitted:</p>
   <% @reports.each do |report| %>
     <h2>Report: <%= report.id %></h2>
-    <ul>
-      <li><em>Reporter:</em> <%= report.reporter.nil? ? "nil" : report.reporter.email %> / <%= report.reporter.nil? ? "nil" : report.reporter.phone %></li>
-      <li><em>Captured:</em> <%= report.captured %></li>
-      <li><em>Submitted:</em> <%= report.submitted %></li>
-      <li><em>Category:</em> <%= report.category %></li>
-      <li><em>Description:</em> <%= report.description %></li>
-      <li><em>Severity:</em> <span style="background: <%= report.severity.downcase %>"><%= report.severity %></span></li>
-      <li><em>Location:</em> (<%= report.location.latitude %>, <%= report.location.longitude %>) [<%= report.location.address %>]</li>
-      <% if !report.photos.nil? && !report.photos.empty? %>
-      <li><em>Photos:</em><br /> 
-              <% report.photos.each do |photo| %>
-                        <a href="<%= photo %>"><img src="<%= photo.sub(".jpg", ".th.jpg") %>" />
-              <% end %>
-      </li>
-      <% end %>
-    </ul>
+    <table width="100%">
+            <tr>
+                    <td valign="top" width="50%">
+                            <ul>
+                              <li><em>Reporter:</em> <%= report.reporter.nil? ? "nil" : report.reporter.email %> / <%= report.reporter.nil? ? "nil" : report.reporter.phone %></li>
+                              <li><em>Captured:</em> <%= report.captured.strftime("%Y-%m-%d %H:%M") %></li>
+                              <li><em>Submitted:</em> <%= report.submitted.strftime("%Y-%m-%d %H:%M") %></li>
+                              <li><em>Category:</em> <%= report.category %></li>
+                              <li><em>Description:</em> <%= report.description %></li>
+                              <li><em>Severity:</em> <span style="background: <%= report.severity.downcase %>"><%= report.severity %></span></li>
 
-    <h3>Metadata (Class: <%= report.metadata.class %>):</h3>
-    <pre>
-      <%= report.metadata.inspect %>
-    </pre>
+                            <h3>Metadata (Class: <%= report.metadata.class %>):</h3>
+                            <div style="overflow: auto;">
+                            <pre>
+                              <%= report.metadata.to_yaml %>
+                            </pre>
+                            </div>
+                        
+                    </td>
+                    <td valign="top" width="50%">
+                              <li><em>Location:</em> (<%= report.location.latitude %>, <%= report.location.longitude %>) [<%= report.location.address %>]<br />
+                              <img src="http://maps.google.com/maps/api/staticmap?center=<%= report.location.latitude %>,<%= report.location.longitude%>&zoom=14&size=256x256&sensor=false&maptype=roadmap" />        
+                              </li>
+
+
+                              <% if !report.photos.nil? && !report.photos.empty? %>
+                              <li><em>Photos:</em><br /> 
+                                      <% report.photos.each do |photo| %>
+                                                <a href="<%= photo %>"><img src="<%= photo.sub(".jpg", ".th.jpg") %>" />
+                                      <% end %>
+                              </li>
+                              <% end %>
+                            </ul>
+                        
+                    </td>
+            </tr>
+    </table>
+
   <% end %>
 <% end %>
 
