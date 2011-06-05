@@ -50,7 +50,7 @@ class Reporter
   include MongoMapper::Document
 
   key :email, String, :format => /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  key :phone, String, :format => /\(?\d{3}\)?-?\d{3}-?\d{4}/
+  key :phone, String, :format => /[0-9\-()+]+/
 
   many :reports
 
