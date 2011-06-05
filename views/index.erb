@@ -34,7 +34,7 @@
 
                                       <% if !report.location.latitude.nil? %>
                                       <br />
-                                      <img src="http://maps.google.com/maps/api/staticmap?center=<%= report.location.latitude %>,<%= report.location.longitude%>&zoom=14&size=256x256&sensor=false&maptype=roadmap&markers=color: <%= report.severity.downcase %>%7Clabel:X%7C<%= report.location.latitude %>,<%= report.location.longitude%>" />        
+                                      <img src="http://maps.google.com/maps/api/staticmap?center=<%= report.location.latitude %>,<%= report.location.longitude%>&zoom=14&size=256x256&sensor=false&maptype=roadmap&markers=color:<%= report.severity.downcase %>%7Clabel:X%7C<%= report.location.latitude %>,<%= report.location.longitude%>" />        
                                       </li>
                                       <% end %>
 
