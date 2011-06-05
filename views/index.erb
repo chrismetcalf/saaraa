@@ -26,7 +26,12 @@
                         
                     </td>
                     <td valign="top" width="50%">
-                              <li><em>Location:</em> (<%= report.location.latitude %>, <%= report.location.longitude %>) [<%= report.location.address %>]<br />
+                              <li><em>Location:</em> (<%= report.location.latitude %>, <%= report.location.longitude %>)
+                              <% if !report.location.address.nil? %>
+                              <br />
+                              <%= report.location.address %>
+                              <% end %>
+                              <br />
                               <img src="http://maps.google.com/maps/api/staticmap?center=<%= report.location.latitude %>,<%= report.location.longitude%>&zoom=14&size=256x256&sensor=false&maptype=roadmap" />        
                               </li>
 
