@@ -3,7 +3,7 @@
 <% if(@reports.nil? || @reports.count == 0) %>
   <p>No reports yet.</p>
 <% else %>
-  <p>The following reports have been submitted</p>
+  <p>The following reports have been submitted:</p>
   <% @reports.each do |report| %>
     <h2>Report: <%= report.id %></h2>
     <ul>
