@@ -14,6 +14,13 @@
       <li><em>Description:</em> <%= report.description %></li>
       <li><em>Severity:</em> <span style="background: <%= report.severity.downcase %>"><%= report.severity %></span></li>
       <li><em>Location:</em> (<%= report.location.latitude %>, <%= report.location.longitude %>) [<%= report.location.address %>]</li>
+      <li><em>Photos:</em> 
+              <ul>
+              <% @reports.photos.each do |photo| %>
+                <li><a href="<%= photo%>"><%= photo.sub(".jpg", ".th.jpg") %></li>
+              <% end %>
+              </ul>
+      </li>
     </ul>
 
     <h3>Metadata (Class: <%= report.metadata.class %>):</h3>
