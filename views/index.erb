@@ -7,7 +7,7 @@
   <% @reports.each do |report| %>
     <h2>Report: <%= report.id %></h2>
     <ul>
-      <li><em>Reporter:</em> <%= report.reporter.email %> / <%= report.reporter.phone %></li>
+      <li><em>Reporter:</em> <%= report.reporter.nil? ? "nil" : report.reporter.email %> / <%= report.reporter.nil? ? "nil" : report.reporter.phone %></li>
       <li><em>Captured:</em> <%= report.captured %></li>
       <li><em>Submitted:</em> <%= report.submitted %></li>
       <li><em>Category:</em> <%= report.category %></li>
