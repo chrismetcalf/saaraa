@@ -118,6 +118,8 @@ post '/reports' do
     return [403, "Error parsing JSON request"]
   end
 
+  puts "Received: #{data.inspect}"
+
   begin
     # High-level
     report = Report.new

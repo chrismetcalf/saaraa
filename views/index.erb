@@ -13,7 +13,7 @@
       <li><em>Category:</em> <%= report.category %></li>
       <li><em>Description:</em> <%= report.description %></li>
       <li><em>Severity:</em> <span style="background: <%= report.severity.downcase %>"><%= report.severity %></span></li>
-      <li><em>Location:</em> (<%= report.location.latitude %>, <%= report.location.longitude %>)</li>
+      <li><em>Location:</em> (<%= report.location.latitude %>, <%= report.location.longitude %>) [<%= report.location.address %>]</li>
     </ul>
 
     <h3>Metadata (Class: <%= report.metadata.class %>):</h3>
